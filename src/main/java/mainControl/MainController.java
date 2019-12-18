@@ -1,4 +1,4 @@
-package mainControl.main;
+package mainControl;
 
 import fileControl.FileControllerImpl;
 import folderControl.FolderControllerImpl;
