@@ -1,7 +1,6 @@
 package folderControl;
 
-import com.sun.org.apache.xpath.internal.operations.Variable;
-import staticF.Var;
+import staticVar.Var;
 
 import java.io.File;
 import java.util.List;
@@ -29,8 +28,6 @@ public class FolderControllerImpl /*implements FolderController */ {
 
     public void start() {
         //download form SP recent file
-
         folderOperation.searchFolder(Var.pathFolderDownloads);
     }
-
 }

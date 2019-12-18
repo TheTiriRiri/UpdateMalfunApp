@@ -1,12 +1,9 @@
 package folderControl;
 
-import staticF.Var;
-
 import java.io.File;
 
 public class FolderInit {
 
-    String path = Var.pathFolderCompare;
     private File file;
 
     public FolderInit(String path1, String path2, String path3
@@ -29,21 +26,3 @@ public class FolderInit {
         }
     }
 }
-
-
-  /*  {
-        File f = new File("C:/AMD");
-        if (f.exists() && f.isDirectory()) {
-            System.out.println("Exists");
-            //if the file is present then it will show the msg
-        } else {
-            System.out.println("NOT Exists");
-            //if the file is Not present then it will show the msg
-        }
-    }
-}
-
-
-    File sourceLoc = new File("/a/b/c/folderName");
-    boolean isFolderExisted = false;
-          sourceLoc.exists()==true?sourceLoc.isDirectory()==true?isFolderExisted=true:isFolderExisted=false:isFolderExisted=false;*/

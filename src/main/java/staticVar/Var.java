@@ -1,4 +1,4 @@
-package staticF;
+package staticVar;
 
 public class Var {
     private static final String path = "./operationFolder";

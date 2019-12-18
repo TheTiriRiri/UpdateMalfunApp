@@ -1,5 +1,7 @@
 package folderControl;
 
+import miscellaneous.SystemOperation;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,8 +34,14 @@ public class FolderOperation {
                     .filter(Files::isRegularFile)
                     .map(Path::toFile)
                     .collect(Collectors.toList());
+
+            if (listFilePath.isEmpty()) {
+                System.out.println("FOLDER: " + path + " - EMPTY");
+                SystemOperation.appAbort();
+            }
+
         } catch (IOException e) {
-            System.out.println("PATH: " + path + " - NO FILES");
+            System.out.println("PATH: " + path + " - DOES NOT EXIST");
             e.printStackTrace();
         }
     }
