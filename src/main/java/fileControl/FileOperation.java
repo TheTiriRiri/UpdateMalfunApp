@@ -45,4 +45,20 @@ public class FileOperation {
             e.printStackTrace();
         }
     }
+
+    public static double getFileSizeMegaBytes(String fileSource) {
+        File file = new File(fileSource);
+        if (file.exists() && file.isFile()) {
+            return (double) file.length() / (1024 * 1024)/* + " mb"*/;
+        }
+        return 0;
+    }
+
+    public static double getFileSizeKiloBytes(String fileSource) {
+        File file = new File(fileSource);
+        if (!file.exists() || !file.isFile()) {
+            return (double) file.length() / 1024 /*+ " kb"*/;
+        }
+        return 0;
+    }
 }

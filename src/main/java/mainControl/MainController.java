@@ -4,13 +4,9 @@ import fileControl.FileName;
 import fileControl.FileOperation;
 import folderControl.FolderInitImpl;
 import folderControl.FolderSearch;
-import miscellaneous.DateNow;
 import staticVar.Var;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class MainController {
 
@@ -34,8 +30,12 @@ public class MainController {
         //delete from downloads
         /*FileOperation.delete(folderSearchDownloads.getListFilePathString().get(0));*/
 
-        //check files to procedure old - new
-        //open excel from temp (new)
+        //open excel from new
+        FolderSearch folderSearchNew = new FolderSearch(Var.pathFolderNew);
+        double a = FileOperation.getFileSizeMegaBytes(folderSearchNew.getListFilePathString().get(0));
+        double b = FileOperation.getFileSizeMegaBytes(folderSearchDownloads.getListFilePathString().get(0));
+        System.out.println(a + " " + b + " " + " "+ (a - b));
+
         //open excel from old
         //compare new - old
         //generate comparison
