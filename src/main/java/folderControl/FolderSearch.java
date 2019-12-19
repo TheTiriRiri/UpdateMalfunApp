@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FolderOperation {
+public class FolderSearch {
 
-    private List<File> listFilePath;
+    private List<File> listFilePath = new ArrayList<>();
     private List<String> listFileName = new ArrayList<>();
 
-    public FolderOperation() {
+    public FolderSearch() {
     }
 
     public List<File> getListFilePath() {
@@ -24,7 +24,6 @@ public class FolderOperation {
     }
 
     public List<String> getListFileName() {
-        getFileName();
         return listFileName;
     }
 
@@ -34,6 +33,8 @@ public class FolderOperation {
                     .filter(Files::isRegularFile)
                     .map(Path::toFile)
                     .collect(Collectors.toList());
+
+            createListFileName();
 
             if (listFilePath.isEmpty()) {
                 System.out.println("FOLDER: " + path + " - EMPTY");
@@ -46,10 +47,10 @@ public class FolderOperation {
         }
     }
 
-    private void getFileName() {
-        for (File fileName : listFilePath) {
-            String tmp = fileName.getName();
-            listFileName.add(tmp);
-        }
+    public void createListFileName() {
+        listFilePath.stream()
+                .map(s -> s.getName())
+                .filter(s -> s.endsWith(".xlsx"))
+                .forEach(listFileName::add);
     }
 }

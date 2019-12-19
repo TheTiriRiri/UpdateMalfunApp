@@ -5,29 +5,26 @@ import staticVar.Var;
 import java.io.File;
 import java.util.List;
 
-public class FolderControllerImpl /*implements FolderController */ {
+public class FolderControllerImpl {
 
-    private FolderInit folderInit;
-    private FolderOperation folderOperation;
+    private FolderSearch folderSearch;
     private List<File> listFilePath;
     private List<String> listFileName;
 
     public FolderControllerImpl() {
-        folderInit = new FolderInit(Var.pathFolderDownloads, Var.pathFolderCompare, Var.pathFolderHistory
-                , Var.pathFolderNew, Var.pathFolderOld, Var.pathFolderResult, Var.pathFolderTemp);
-        folderOperation = new FolderOperation();
+        folderSearch = new FolderSearch();
     }
 
     public List<File> getListFilePath() {
-        return folderOperation.getListFilePath(); // check
+        return folderSearch.getListFilePath(); // check
     }
 
     public List<String> getListFileName() {
-        return folderOperation.getListFileName();
+        return folderSearch.getListFileName();
     }
 
     public void start() {
         //download form SP recent file
-        folderOperation.searchFolder(Var.pathFolderDownloads);
+        folderSearch.searchFolder(Var.pathFolderDownloads);
     }
 }

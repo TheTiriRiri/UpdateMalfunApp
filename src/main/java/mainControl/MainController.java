@@ -2,13 +2,16 @@ package mainControl;
 
 import fileControl.FileControllerImpl;
 import folderControl.FolderControllerImpl;
+import folderControl.FolderInitImpl;
 
 public class MainController {
 
+    FolderInitImpl folderInit;
     FolderControllerImpl folderControllerImpl;
     FileControllerImpl fileControllerImpl;
 
     public MainController() {
+        folderInit = new FolderInitImpl();
         folderControllerImpl = new FolderControllerImpl();
         fileControllerImpl = new FileControllerImpl();
     }
