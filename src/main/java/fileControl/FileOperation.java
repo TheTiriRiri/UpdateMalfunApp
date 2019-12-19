@@ -1,40 +1,48 @@
 package fileControl;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileOperation {
 
-    File file;
-    private String pathFile;
-    private String nameFile;
-    private boolean fileOperationIsOk = false;
+    public static void copy(String pathSource, String pathDest) throws IOException {
+        File src = new File(pathSource);
+        File dest = new File(pathDest);
 
-    public FileOperation() {
-
-    }
-
-    public void copyTo(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
         try {
-            Files.copy(source.toPath(), dest.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
+            is = new FileInputStream(src);
+            os = new FileOutputStream(dest);
+
+            // buffer size 1K
+            byte[] buf = new byte[1024];
+
+            int bytesRead;
+            while ((bytesRead = is.read(buf)) > 0) {
+                os.write(buf, 0, bytesRead);
+            }
+        } finally {
+            is.close();
+            os.close();
         }
     }
 
-    public void delete(String source) {
-        try {
-            Files.delete(Paths.get(source));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void renameTo(String pathSource, String pathDest) {
+        File source = new File(pathSource);
+        File destination = new File(pathDest);
+
+        if (!destination.exists()) {
+            source.renameTo(destination);
         }
     }
 
-    // download from sharepoint
-    public boolean downloadFromSp() {
-
-        return fileOperationIsOk;
+    public static void delete(String pathSource) {
+        try {
+            Files.delete(Paths.get(pathSource));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

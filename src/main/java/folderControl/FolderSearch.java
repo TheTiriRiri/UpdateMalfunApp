@@ -14,13 +14,19 @@ import java.util.stream.Collectors;
 public class FolderSearch {
 
     private List<File> listFilePath = new ArrayList<>();
+    List<String> listFilePathString = new ArrayList<>();
     private List<String> listFileName = new ArrayList<>();
 
-    public FolderSearch() {
+    public FolderSearch(String path) {
+        searchFolder(path);
     }
 
     public List<File> getListFilePath() {
         return listFilePath;
+    }
+
+    public List<String> getListFilePathString() {
+        return listFilePathString;
     }
 
     public List<String> getListFileName() {
@@ -34,6 +40,7 @@ public class FolderSearch {
                     .map(Path::toFile)
                     .collect(Collectors.toList());
 
+            createListFilePathString();
             createListFileName();
 
             if (listFilePath.isEmpty()) {
@@ -47,6 +54,13 @@ public class FolderSearch {
         }
     }
 
+    public void createListFilePathString() {
+        listFilePath.stream()
+                .map(s -> s.getPath())
+                .filter(s -> s.endsWith(".xlsx"))
+                .forEach(listFilePathString::add);
+    }
+
     public void createListFileName() {
         listFilePath.stream()
                 .map(s -> s.getName())
@@ -54,3 +68,15 @@ public class FolderSearch {
                 .forEach(listFileName::add);
     }
 }
+
+      /*try (Stream<Path> walk = Files.walk(Paths.get(path))) {
+
+        listFileName = walk.map(x -> x.toString())
+        .filter(f -> f.endsWith(".xlsx"))
+        .collect(Collectors.toList());
+
+        //    listFileName.forEach(System.out::println);
+
+        } catch (IOException e) {
+        e.printStackTrace();
+        }*/

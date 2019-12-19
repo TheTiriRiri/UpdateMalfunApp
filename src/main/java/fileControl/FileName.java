@@ -1,17 +1,17 @@
 package fileControl;
 
-import java.io.File;
-import java.util.List;
+import miscellaneous.DateNow;
 
 public class FileName {
-
-    private File file;
-    private List<File> listFileName;
-    private boolean fileOperationIsOk;
 
     public FileName() {
     }
 
-    public FileName(File file) {
+    public static String modifyName(String fileName) {
+        StringBuffer textbuffer = new StringBuffer(fileName);
+        int position = textbuffer.lastIndexOf(".");
+        textbuffer.insert(position, DateNow.getCurrentDateTimeString());
+        return textbuffer.toString();
     }
+
 }

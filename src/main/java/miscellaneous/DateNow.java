@@ -17,21 +17,21 @@ public class DateNow {
         System.out.println(formatter.format(date));
     }
 
-    public static void getCurrentDateTimeString() {
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy_MM_dd_HHmm");
+    public static String getCurrentDateTimeString() {
+        SimpleDateFormat formatter= new SimpleDateFormat("_yyyy_MM_dd_HHmm");
         Date date = new Date(System.currentTimeMillis());
-        System.out.println(formatter.format(date));
+        return formatter.format(date);
     }
 
-    public static void getCurrentDateString() {
+    public static String getCurrentDateString() {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy_MM_dd");
         Date date = new Date(System.currentTimeMillis());
-        System.out.println(formatter.format(date));
+        return formatter.format(date);
     }
 
-    public static void getCurrentTimeString() {
+    public static String getCurrentTimeString() {
         SimpleDateFormat formatter= new SimpleDateFormat("HH_mm");
         Date date = new Date(System.currentTimeMillis());
-        System.out.println(formatter.format(date));
+        return formatter.format(date);
     }
 }
