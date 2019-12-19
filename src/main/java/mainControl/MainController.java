@@ -34,7 +34,7 @@ public class MainController {
         //delete from downloads
         /*FileOperation.delete(folderSearchDownloads.getListFilePathString().get(0));*/
 
-        //check
+        //check files to procedure old - new
         //open excel from temp (new)
         //open excel from old
         //compare new - old
