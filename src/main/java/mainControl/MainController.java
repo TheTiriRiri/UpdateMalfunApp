@@ -32,9 +32,8 @@ public class MainController {
 
         //open excel from new
         FolderSearch folderSearchNew = new FolderSearch(Var.pathFolderNew);
-        double a = FileOperation.getFileSizeMegaBytes(folderSearchNew.getListFilePathString().get(0));
-        double b = FileOperation.getFileSizeMegaBytes(folderSearchDownloads.getListFilePathString().get(0));
-        System.out.println(a + " " + b + " " + " "+ (a - b));
+        boolean compareFileSizeIsOk = FileOperation.compareSizeIsOk(FileOperation.getFileSizeMegaBytes(folderSearchNew.getListFilePathString().get(0))
+                , FileOperation.getFileSizeMegaBytes(folderSearchDownloads.getListFilePathString().get(0)), 1.0);
 
         //open excel from old
         //compare new - old

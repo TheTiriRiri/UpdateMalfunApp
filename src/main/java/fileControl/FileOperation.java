@@ -61,4 +61,13 @@ public class FileOperation {
         }
         return 0;
     }
+
+    public static boolean compareSizeIsOk(double serverOneSize, double serverTwoSize, double tolerance) {
+        {
+            if (Math.abs(serverOneSize - serverTwoSize) < tolerance)
+                return true;
+            else
+                return false;
+        }
+    }
 }
