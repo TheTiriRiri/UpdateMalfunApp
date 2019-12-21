@@ -13,14 +13,13 @@ public class ExcelOperation {
 
     }
 
-    public static void excelOpen(String filePath) throws IOException
+    public static Workbook excelOpen(String filePath) throws IOException
             , InvalidFormatException {
         Workbook serverWorkbook = WorkbookFactory.create(new File(filePath));
-        System.out.println("Workbook has " + serverWorkbook.getNumberOfSheets() + " Sheets : ");
+        return serverWorkbook;
     }
 
-    public static void getExcelSheet() {
-        System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
+    public static void getExcelSheet(Workbook serverWorkbook) {
         serverWorkbook.forEach(sheet -> {
             System.out.println("=> " + sheet.getSheetName());
         });
