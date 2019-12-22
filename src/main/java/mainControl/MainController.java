@@ -39,15 +39,9 @@ public class MainController {
 
         //open excel from new
         FolderSearch folderSearchNew = new FolderSearch(Var.pathFolderNew);
-        boolean compareFileSizeIsOk = FileOperation.compareSizeIsOk(FileOperation
-                        .getFileSizeMegaBytes(folderSearchOld.getListFilePathString().get(0))
-                , FileOperation
-                        .getFileSizeMegaBytes(folderSearchNew.getListFilePathString().get(0))
-                , 1.0);
 
-        //open excel from old
+        //open excels
         excelControllerImpl.run(folderSearchOld.getListFilePathString().get(0)
-                /*".\\operationFolder\\old\\005 - Spec_AMFCC_2019_12_10.xlsx"*/
                 , folderSearchNew.getListFilePathString().get(0));
 
 

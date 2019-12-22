@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 
 public class ExcelOperation {
 
@@ -15,14 +14,24 @@ public class ExcelOperation {
 
     public static Workbook excelOpen(String filePath) throws IOException
             , InvalidFormatException {
+        System.out.println("Opening: " + filePath);
         Workbook serverWorkbook = WorkbookFactory.create(new File(filePath));
         return serverWorkbook;
     }
 
     public static void getExcelSheet(Workbook serverWorkbook) {
-        serverWorkbook.forEach(sheet -> {
-            System.out.println("=> " + sheet.getSheetName());
-        });
+        int i = 0;
+        System.out.println("Number of sheets: " + serverWorkbook.getNumberOfSheets());
+        for (Sheet sheet : serverWorkbook) {
+            i++;
+            System.out.println(i + ". " + sheet.getSheetName());
+        }
+        /*serverWorkbook.forEach(sheet -> {
+            System.out.println(i + ". " + sheet.getSheetName());
+        });*/
     }
 
+    public static void excelClose(Workbook serverWorkbook) throws IOException {
+        serverWorkbook.close();
+    }
 }
