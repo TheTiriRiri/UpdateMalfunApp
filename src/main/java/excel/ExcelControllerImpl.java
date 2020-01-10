@@ -18,7 +18,7 @@ public class ExcelControllerImpl {
 
     public void run(String oneServerFilePath, String twoServerFilePath) throws IOException, InvalidFormatException {
         // compare excels size - in tolerance...
-        filesSizeOutOfTolerance(oneServerFilePath, twoServerFilePath);
+      //  filesSizeOutOfTolerance(oneServerFilePath, twoServerFilePath);
 
         //open excels
         oneServerWorkbook = ExcelOperation.excelOpen(oneServerFilePath);
