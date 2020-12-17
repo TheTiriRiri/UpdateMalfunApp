@@ -5,29 +5,33 @@ import miscellaneous.SystemOperation;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
-public class ExcelControllerImpl {
+public class ExcelControllerOpenImpl {
 
     private Workbook oneServerWorkbook;
-    private Workbook twoServerWorkbook;
 
-    public ExcelControllerImpl() {
+    public Workbook getOneServerWorkbook() {
+        return oneServerWorkbook;
     }
 
-    public void run(String oneServerFilePath, String twoServerFilePath) throws IOException, InvalidFormatException {
+    public ExcelControllerOpenImpl() {
+    }
+
+    public void run(String oneServerFilePath) throws IOException, InvalidFormatException {
         // compare excels size - in tolerance...
-      //  filesSizeOutOfTolerance(oneServerFilePath, twoServerFilePath);
+        //  filesSizeOutOfTolerance(oneServerFilePath, twoServerFilePath);
 
         //open excels
         oneServerWorkbook = ExcelOperation.excelOpen(oneServerFilePath);
         ExcelOperation.getExcelSheet(oneServerWorkbook);
-        twoServerWorkbook = ExcelOperation.excelOpen(twoServerFilePath);
-        ExcelOperation.getExcelSheet(twoServerWorkbook);
+        ExcelOperation.getExcelSheetValueAt(oneServerWorkbook);
+        ExcelOperation.getExcelSheetAt();
+       // ExcelOperation.excelClose(oneServerWorkbook); //error!
     }
 
-    private void filesSizeOutOfTolerance(String oneServerFilePath, String twoServerFilePath) {
+/*    private void filesSizeOutOfTolerance(String oneServerFilePath, String twoServerFilePath) {
         if (!compareFileSizeIsOk(oneServerFilePath, twoServerFilePath)) {
             System.out.println("FILES OUT OF SIZE TOLERANCE");
             SystemOperation.appAbort();
@@ -39,6 +43,6 @@ public class ExcelControllerImpl {
                         .getFileSizeMegaBytes(oneServerFilePath)
                 , FileOperation
                         .getFileSizeMegaBytes(twoServerFilePath)
-                , 1.0);
-    }
+                , 1.0);//mb
+    }*/
 }

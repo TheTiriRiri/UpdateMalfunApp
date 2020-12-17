@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class FolderSearch {
 
     private List<File> listFilePath = new ArrayList<>();
-    List<String> listFilePathString = new ArrayList<>();
+    private List<String> listFilePathString = new ArrayList<>();
     private List<String> listFileName = new ArrayList<>();
 
     public FolderSearch(String path) {
@@ -48,6 +48,9 @@ public class FolderSearch {
                 SystemOperation.appAbort();
             }
 
+            System.out.println("FOLDER: " + path + "File exist:");
+            listFileName.forEach(System.out::println);
+
         } catch (IOException e) {
             System.out.println("PATH: " + path + " - DOES NOT EXIST");
             e.printStackTrace();
@@ -57,14 +60,14 @@ public class FolderSearch {
     public void createListFilePathString() {
         listFilePath.stream()
                 .map(s -> s.getPath())
-                .filter(s -> s.endsWith(".xlsx"))
+             //   .filter(s -> s.endsWith(".xlsx"))
                 .forEach(listFilePathString::add);
     }
 
     public void createListFileName() {
         listFilePath.stream()
                 .map(s -> s.getName())
-                .filter(s -> s.endsWith(".xlsx"))
+            //    .filter(s -> s.endsWith(".xlsx"))
                 .forEach(listFileName::add);
     }
 }

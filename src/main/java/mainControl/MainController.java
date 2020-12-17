@@ -1,9 +1,14 @@
 package mainControl;
 
-import excel.ExcelControllerImpl;
+import excel.ExcelControllerCompImpl;
+import excel.ExcelControllerOpenImpl;
+import fileControl.FileName;
+import fileControl.FileOperation;
 import folderControl.FolderInitImpl;
-import dao.RecordDAO;
+import folderControl.FolderSearch;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Workbook;
+import staticVar.Var;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,34 +16,42 @@ import java.io.IOException;
 public class MainController {
 
     FolderInitImpl folderInitImpl;
-    ExcelControllerImpl excelControllerImpl;
-    File oneServerFile;
-    File twoServerFile;
+    ExcelControllerOpenImpl excelControllerOpenImpl;
+    //ExcelControllerCompImpl excelControllerCompImpl;
+    Workbook oneServerFile;
+    //File twoServerFile;
 
     public MainController() {
         folderInitImpl = new FolderInitImpl();
-        excelControllerImpl = new ExcelControllerImpl();
+        excelControllerOpenImpl = new ExcelControllerOpenImpl();
     }
 
     public void run() throws IOException, InvalidFormatException {
         // downloads file from SP - to do soon
 
         // search downloads folder
-        /*FolderSearch folderSearchDownloads = new FolderSearch(Var.pathFolderDownloads);
-        FolderSearch folderSearchOld = new FolderSearch(Var.pathFolderOld);*/
+        FolderSearch folderSearchDownloads = new FolderSearch(Var.pathFolderDownloads);
+        //FolderSearch folderSearchOld = new FolderSearch(Var.pathFolderOld);
 
-        //copy file form downloads to new and temp
-       /* FileOperation.copy(folderSearchDownloads.getListFilePathString().get(0)
-                , Var.pathFolderNew + FileName.modifyName(folderSearchDownloads.getListFileName().get(0)));*/
+        //copy file from downloads to new and temp
+        FileOperation.copy(folderSearchDownloads.getListFilePathString().get(0)
+                , Var.pathFolderTemp + FileName.modifyName(folderSearchDownloads.getListFileName().get(0)));
 
         //delete from downloads
         /*FileOperation.delete(folderSearchDownloads.getListFilePathString().get(0));*/
 
-        //open excel from new
-        /* FolderSearch folderSearchNew = new FolderSearch(Var.pathFolderNew);*/
+        //open excel from temp
+        FolderSearch folderSearchTemp = new FolderSearch(Var.pathFolderTemp);
 
-        //open excels
-      /*  excelControllerImpl.run(folderSearchOld.getListFilePathString().get(0)
+        //open excel
+        excelControllerOpenImpl.run(folderSearchTemp.getListFilePathString().get(0));
+        oneServerFile = excelControllerOpenImpl.getOneServerWorkbook();
+
+        //create table "database"
+        oneServerFile = excelControllerOpenImpl.getOneServerWorkbook();
+
+        //open excels to compare
+        /*excelControllerCompImpl.run(folderSearchOld.getListFilePathString().get(0)
                 , folderSearchNew.getListFilePathString().get(0));*/
 
 
@@ -48,7 +61,6 @@ public class MainController {
         //delete from old
         //move from new to old
         //delete from temp
-        new RecordDAO().showRecords();
 
 
     }
