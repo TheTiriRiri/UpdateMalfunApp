@@ -3,8 +3,7 @@ package excel;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +39,7 @@ public class ExcelOperation {
 
     public static void getExcelSheetValueAt(Workbook serverWorkbook) {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("???number of sheets???");
+        System.out.println("PUT number of sheet:");
         int i = keyboard.nextInt();
         ExecuteSheet = serverWorkbook.getSheetAt(i - 1);
         System.out.println("Proceeding sheet: " + ExecuteSheet.getSheetName());
@@ -54,21 +53,25 @@ public class ExcelOperation {
         // 1. You can obtain a rowIterator and columnIterator and iterate over them
         System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
         Iterator<Row> rowIterator = ExecuteSheet.rowIterator();
+        int i = 1; // 1=Header
+
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
+            StringBuilder sb = new StringBuilder();
+
 
             // Now let's iterate over the columns of the current row
             Iterator<Cell> cellIterator = row.cellIterator();
-            StringBuilder sb = new StringBuilder();
 
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
-                String cellValue = dataFormatter.formatCellValue(cell);
+                String cellValue = dataFormatter.formatCellValue(cell).replaceAll("\n", " ^^^");
                 sb.append(cellValue + ";");
-                //System.out.print(cellValue + "\t");
             }
+
             //System.out.println();
-            ExcelFileList.add(sb.toString());
+            ExcelFileList.add(/*i + ";" + */sb.toString() + '\n');
+            i++;
         }
         for (String temp : ExcelFileList) {
             System.out.println(temp);
@@ -92,6 +95,20 @@ public class ExcelOperation {
             });
             System.out.println();
         });*/
+
+        // File input path
+
+        //File file = new File("C:\\Users\\jj7sd4\\IdeaProjects\\UpdateMalfunApp\\operationFolder\\result\\output.csv");
+        try (PrintWriter writer = new PrintWriter(new File("C:\\Users\\jj7sd4\\IdeaProjects\\UpdateMalfunApp\\operationFolder\\result\\output.csv"))) {
+
+            for (String temp : ExcelFileList) {
+                writer.write(temp);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static void excelClose(Workbook serverWorkbook) throws IOException {
