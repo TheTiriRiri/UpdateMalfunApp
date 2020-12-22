@@ -5,12 +5,15 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 public class ExcelOperation {
 
     public static Sheet ExecuteSheet;
+    // private List<String> ExcelFileList = new ArrayList<>();
 
     public ExcelOperation() {
 
@@ -46,6 +49,7 @@ public class ExcelOperation {
     public static void getExcelSheetAt(/*ExecuteSheet*/) {
         // Create a DataFormatter to format and get each cell's value as String
         DataFormatter dataFormatter = new DataFormatter();
+        List<String> ExcelFileList = new ArrayList<>();
 
         // 1. You can obtain a rowIterator and columnIterator and iterate over them
         System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
@@ -55,13 +59,19 @@ public class ExcelOperation {
 
             // Now let's iterate over the columns of the current row
             Iterator<Cell> cellIterator = row.cellIterator();
+            StringBuilder sb = new StringBuilder();
 
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
                 String cellValue = dataFormatter.formatCellValue(cell);
-                System.out.print(cellValue + "\t");
+                sb.append(cellValue + ";");
+                //System.out.print(cellValue + "\t");
             }
-            System.out.println();
+            //System.out.println();
+            ExcelFileList.add(sb.toString());
+        }
+        for (String temp : ExcelFileList) {
+            System.out.println(temp);
         }
 
         /*        // 2. Or you can use a for-each loop to iterate over the rows and columns
