@@ -96,9 +96,8 @@ public class ExcelOperation {
             System.out.println();
         });*/
 
-        // File input path
 
-        //File file = new File("C:\\Users\\jj7sd4\\IdeaProjects\\UpdateMalfunApp\\operationFolder\\result\\output.csv");
+        // Write To File - Test
         try (PrintWriter writer = new PrintWriter(new File("C:\\Users\\jj7sd4\\IdeaProjects\\UpdateMalfunApp\\operationFolder\\result\\output.csv"))) {
 
             for (String temp : ExcelFileList) {
